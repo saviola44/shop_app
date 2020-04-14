@@ -112,7 +112,7 @@ class Products with ChangeNotifier {
           description: product.description,
           imageUrl: product.imageUrl,
           price: product.price,
-          id: DateTime.now().toString());
+          id: json.decode(response.body)['name']);
       _items.add(newProduct);
 
       notifyListeners();
