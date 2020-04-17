@@ -20,26 +20,28 @@ class Product with ChangeNotifier {
     this.isFavourite = false,
   });
 
-
   void _setFavValue(bool newValue) {
     isFavourite = newValue;
     notifyListeners();
-
   }
-  Future<void> toggleFavouriteStatus(String token) async{
+
+  Future<void> toggleFavouriteStatus(String token, String userId) async {
     final oldStatus = isFavourite;
     isFavourite = !isFavourite;
     notifyListeners();
-    final url = 'https://mealapp-840d3.firebaseio.com/products/$id.json?auth=$token';
+    final url =
+        'https://mealapp-840d3.firebaseio.com/userFavorites/$userId/$id.json?auth=$token';
     try {
-      final response = await http.patch(url,
-          body: json.encode({
-            'isFavourite': isFavourite,
-          }));
-      if(response.statusCode>=400) {
+      final response = await http.put(
+        url,
+        body: json.encode(
+          isFavourite,
+        ),
+      );
+      if (response.statusCode >= 400) {
         _setFavValue(oldStatus);
       }
-    } catch(error) {
+    } catch (error) {
       _setFavValue(oldStatus);
     }
   }
