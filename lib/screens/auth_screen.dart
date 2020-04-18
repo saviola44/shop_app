@@ -120,7 +120,7 @@ class _AuthCardState extends State<AuthCard>
             begin: Offset(0, -1.5), end: Offset(0,0))
         .animate(CurvedAnimation(parent: _controller, curve: Curves.linear));
 
-    _heightAnimation.addListener(() => setState(() {}));
+    _slideAnimation.addListener(() => setState(() {}));
 
     _opacityAnimation = Tween(begin: 0.0, end: 1.0)
         .animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
